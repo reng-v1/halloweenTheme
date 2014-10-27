@@ -1,5 +1,17 @@
 @import "compass/reset";
-$sky-color: #26466D;
+@import "compass/css3";
+
+/*Variables*/
+$sky: #26466D;
+$cloud: #f2f9fe;
+$moon: #FEFCD7;
+$trunk: #593E1A;
+$leaves: #3A5F0B;
+$building-color: #000000;
+$door: #2C2416;
+$doorKnot: #CC9900;
+$window: yellow;
+$windowFrame: #BAA378;
 
 body {
   background-color: black;
@@ -9,47 +21,283 @@ body {
   width: 1024px;
   height: 768px;
   margin: 0 auto;
-  background-color: $sky-color;
+  background-color: $sky;
+  position: relative;
+  overflow: hidden;
 }
 
-#cloud, #cloud2 {
-	width: 350px; height: 120px;
-	background: #f2f9fe;
-	background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -webkit-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
-	border-radius: 100px;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	position: relative;
-	margin: 120px auto 20px;
-}
-
-#cloud:after, #cloud:before, #cloud2:after, #cloud2:before {
-	content: '';
+.cloud {
+	width: 250px;
+	height: 160px;
 	position: absolute;
-	background: #f2f9fe;
-	z-index: -1
+	top: 60px;
+	left: 210px;
+	.main-body {
+		width: 250px;
+		height: 80px;
+		background: $cloud;
+		@include border-radius(100px);
+		position: relative;
+		top: 80px;
+		z-index: 2;
+	}
+	.small-circle {
+		width: 70px; 
+		height: 70px;
+		background: $cloud;
+		position: relative;
+		top: -30px; 
+		left: 40px;
+		@include border-radius(100px);
+	}
+	.big-circle {
+		width: 120px; 
+		height: 120px;
+		background: $cloud;
+		position: relative;
+		top: -130px; 
+		right: -100px;
+		@include border-radius(200px);
+	}
 }
 
-#cloud:after, #cloud2:after {
-	width: 100px; 
-	height: 100px;
-	top: -50px; 
-	left: 50px;
-	border-radius: 100px;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
+.cloud2 {
+	width: 250px;
+	height: 160px;
+	position: absolute;
+	top: 80px;
+	left: 740px;
+	.main-body {
+		width: 250px;
+		height: 80px;
+		background: $cloud;
+		@include border-radius(100px);
+		position: relative;
+		top: 80px;
+		z-index: 2;
+	}
+	.small-circle {
+		width: 70px; 
+		height: 70px;
+		background: $cloud;
+		position: relative;
+		top: -20px; 
+		left: 140px;
+		@include border-radius(100px);
+	}
+	.big-circle {
+		width: 120px; 
+		height: 120px;
+		background: $cloud;
+		position: relative;
+		top: -120px; 
+		right: -30px;
+		@include border-radius(200px);
+	}
 }
 
-#cloud:before, #cloud2:before {
-	width: 180px; 
+.moon {
+	width: 180px;
 	height: 180px;
-	top: -90px; 
-	right: 50px;
-	border-radius: 200px;
-	-webkit-border-radius: 200px;
-	-moz-border-radius: 200px;
+	background: $moon;
+	@include border-radius(100px);
+	position: absolute;
+	top: 15px;
+	left: 15px;
+}
+
+.ground {
+	width: 1024px;
+	height: 120px;
+	background: #2C6700;
+	position: absolute;
+	bottom: 0;
+	@include border-top-right-radius(200px);
+	@include border-top-left-radius(200px);
+}
+
+.tree {
+	.trunk {
+		width: 75px;
+		height: 200px;
+		background: $trunk;
+		position: absolute;
+		top: 450px;
+		left: 150px;
+		&:before {
+			content: '';
+			width: 50px;
+			height: 50px;
+			background: $trunk;
+			position: absolute;
+			top: 155px;
+			left: 0px;
+			@include transform(skewX(-45deg));
+			@include border-radius(50% 0);
+		}
+		&:after {
+			content: '';
+			width: 50px;
+			height: 50px;
+			background: $trunk;
+			position: absolute;
+			top: 155px;
+			left: 30px;
+			@include transform(skewX(45deg));
+			@include border-radius(0 50%);
+		}
+	}
+	.leaves {
+		width: 200px;
+		height: 200px;
+		background: $leaves;
+		@include border-radius(100px);
+		position: absolute;
+		top: 300px;
+		left: 90px;
+		@include box-shadow(black 1px 1px 3px);
+		z-index: 1;
+		&:before {
+			content: '';
+			width: 50px;
+			height: 50px;
+			background: $leaves;
+			position: absolute;
+			top: 130px;
+			left: -10px;
+			@include border-radius(100px);
+			@include box-shadow(black 1px 1px 3px);
+			z-index: 3;
+		}
+		&:after {
+			content: '';
+			width: 100px;
+			height: 100px;
+			background: $leaves;
+			position: absolute;
+			top: 60px;
+			left: -50px;
+			@include border-radius(100px);
+			@include box-shadow(black 1px 1px 3px);
+			z-index: 2;
+		}
+	}
+}
+
+.windows {
+	width: 100px;
+	height: 70px;
+	background: $window;
+	border: 2px $windowFrame solid;
+	position: absolute;
+	&:before {
+		content: '';
+		width: 100px;
+		height: 2px;
+		background: $windowFrame;
+		position: absolute;
+		top: 36px;
+	}
+	&:after {
+		content: '';
+		width: 2px;
+		height: 70px;
+		background: $windowFrame;
+		position: absolute;
+		left: 50px;
+	}
+}
+
+.mansion {
+	position: absolute;
+	top: 240px;
+	left: 380px;
+	.main-square {
+		width: 510px;
+		height: 250px;
+		background: $building-color;
+		position: absolute;
+		top: 170px;
+		.door {
+			width: 60px;
+			height: 100px;
+			background: $door;
+			position: absolute;
+			top: 150px;
+			left: 50%;
+			margin-left: -25px;
+			&:before {
+				content: '';
+				width: 10px;
+				height: 10px;
+				background: $doorKnot;
+				position: absolute;
+				top: 40px;
+				left: 10px;
+				@include border-radius(100px);
+			}
+		}
+		.window1 {
+			top: 30px;
+			left: 50px;
+		}
+		.window2 {
+			top: 30px;
+			left: 205px;
+		}
+		.window3 {
+			top: 30px;
+			left: 360px;
+		}
+	}
+	.roof {
+		width: 550px;
+		height: 60px;
+		background: $building-color;
+		position: absolute;
+		top: 110px;
+		left: -20px;
+		&:before {
+			content: '';
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 0 60px 60px;
+			border-color: transparent transparent #000000 transparent;
+			position: absolute;
+			left: -60px;
+		}
+		&:after {
+			content: '';
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 60px 0 0 60px;
+			border-color: transparent transparent transparent #000000;
+			position: absolute;
+			left: 550px;
+		}
+	}
+	.small-square {
+		width: 300px;
+		height: 150px;
+		background: black;
+		position: absolute;
+		left: 100px;
+		top: 0px;
+		.window1 {
+			top: 20px;
+			left: 100px;
+		}
+	}
+	.top-roof {
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 175px 80px 175px;
+		border-color: transparent transparent #000000 transparent;
+		position: absolute;
+		top: -80px;
+		left: 75px;
+	}
 }
